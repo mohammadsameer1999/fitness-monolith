@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
+@ToString
 @Entity
 @Table(name = "users")
 @AllArgsConstructor

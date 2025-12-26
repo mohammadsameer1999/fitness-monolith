@@ -48,7 +48,7 @@ public class Recommendation {
     private String type;
 
     @NotBlank
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "json")
     private String recommendation;
 
     @ElementCollection
@@ -56,7 +56,7 @@ public class Recommendation {
             name = "recommendation_improvements",
             joinColumns = @JoinColumn(name = "recommendation_id")
     )
-    @Column(name = "improvement", nullable = false)
+    @Column(name = "improvement", nullable = false,columnDefinition = "json")
     @NotEmpty
     private List<String> improvements;
 
@@ -65,7 +65,7 @@ public class Recommendation {
             name = "recommendation_suggestions",
             joinColumns = @JoinColumn(name = "recommendation_id")
     )
-    @Column(name = "suggestion", nullable = false)
+    @Column(name = "suggestion", nullable = false,columnDefinition = "json")
     @NotEmpty
     private List<String> suggestions;
 
