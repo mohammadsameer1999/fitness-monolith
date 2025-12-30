@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@ToString
+@ToString(exclude = {"user", "recommendations"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +36,7 @@ public class Activity {
     )
     @JsonIgnore
     private User user;   // ✅ FIXED
-
+@Enumerated
     private ActivityType type;
 
     private Integer duration;

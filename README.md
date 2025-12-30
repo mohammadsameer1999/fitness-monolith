@@ -14,18 +14,41 @@ This is a monolithic fitness application built with Spring Boot that provides fu
 - **Spring Data JPA**
 - **Spring Web MVC**
 - **MySQL Database**
-- **Lombok**
-- **Maven**
+- **Lombok** (Reducing boilerplate code)
+- **MapStruct** (Entity-DTO mapping)
+- **Maven** (Build tool)
+- **Jackson** (JSON processing)
+- **Spring Validation** (Input validation)
 
 ## Project Structure
 
 ```
 src/main/java/com/project/fitness/
 ├── FitnessMonolithApplication.java  # Main Spring Boot application
-└── model/
-    ├── User.java                    # User entity model
-    ├── Activity.java                # Activity entity model
-    └── Recommendation.java          # Recommendation entity model
+├── controller/                      # REST controllers
+│   ├── ActivityController.java      # Activity API endpoints
+│   └── AuthController.java          # Authentication endpoints
+├── dto/                            # Data Transfer Objects
+│   ├── ActivityRequest.java         # Activity creation request
+│   ├── ActivityResponse.java        # Activity API response
+│   ├── RegisterRequest.java         # User registration request
+│   └── UserResponse.java            # User API response
+├── mapper/                         # MapStruct mappers
+│   └── ActivityMapper.java         # Activity entity-DTO mapping
+├── model/                          # JPA entities
+│   ├── Activity.java               # Activity entity
+│   ├── ActivityType.java           # Activity type enumeration
+│   ├── Recommendation.java         # Recommendation entity
+│   └── User.java                   # User entity
+├── repository/                     # Data access layer
+│   ├── ActivityRepository.java     # Activity data repository
+│   └── UserRepository.java         # User data repository
+└── service/                        # Business logic
+    ├── ActivityService.java         # Activity service interface
+    ├── UserService.java             # User service interface
+    └── impl/                       # Service implementations
+        ├── ActivityServiceImpl.java # Activity business logic
+        └── UserServiceImpl.java     # User business logic
 ```
 
 ## Prerequisites
@@ -71,10 +94,20 @@ src/main/java/com/project/fitness/
 
 ## API Endpoints
 
-The application provides RESTful APIs for:
-- User management
-- Activity tracking
-- Recommendations
+### Activities
+- `GET /getActivities` - Retrieve all activities
+
+### Authentication
+- User registration and authentication endpoints
+
+### Data Models
+
+The application uses the following main entities:
+
+- **User** - User account information with profile data
+- **Activity** - Fitness activity records with metrics (duration, calories, start time, etc.)
+- **ActivityType** - Enumeration of supported activity types
+- **Recommendation** - System-generated fitness recommendations
 
 ## Contributing
 
