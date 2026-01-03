@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@ToString(exclude = {"user", "recommendations"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,13 +29,14 @@ public class Activity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "user_id",
-            nullable = true,
+            nullable = false,
             foreignKey = @ForeignKey(name = "fk_activity_user")
     )
     @JsonIgnore
-    private User user;   // ✅ FIXED
-@Enumerated
-    private ActivityType type;
+    private User user;
+
+    @Column(nullable = false)
+    private String type;
 
     private Integer duration;
 
@@ -45,9 +44,8 @@ public class Activity {
 
     private LocalDateTime startTime;
 
-    // JSON column
+    // JSON column (MySQL 5.7+)
     @JdbcTypeCode(SqlTypes.JSON)
-
     @Column(columnDefinition = "json")
     private Map<String, Object> additionalMetrics;
 

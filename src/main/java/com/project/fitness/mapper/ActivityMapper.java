@@ -22,8 +22,6 @@ public interface ActivityMapper {
         if (userId == null) {
             return null;
         }
-        User user = new User();
-        user.setId(userId);
-        return user;
+        return User.builder().id(userId).build();
     }
 }

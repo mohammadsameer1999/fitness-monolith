@@ -15,7 +15,6 @@ import java.util.List;
 
 @Data
 @Builder
-@ToString(exclude = {"activities", "recommendations"})
 @Entity
 @Table(name = "users")
 @AllArgsConstructor

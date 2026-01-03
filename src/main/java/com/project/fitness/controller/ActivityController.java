@@ -25,6 +25,12 @@ public class ActivityController {
     public ResponseEntity<List<Activity>> getAllActivities() {
         return ResponseEntity.ok(activityService.getActivities());
     }
+
+    @GetMapping
+    public ResponseEntity<List<ActivityResponse>> getUserActivities(@RequestHeader(value = "X-User-ID") Long userId ) {
+        return ResponseEntity.ok(activityService.getUserActivites(userId));
+    }
+
     @DeleteMapping
     public ResponseEntity<Void> deleteActivities(@RequestParam List<Long> ids) {
         activityService.deleteActivities(ids);

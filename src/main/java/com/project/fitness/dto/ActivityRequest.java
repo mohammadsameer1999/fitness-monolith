@@ -14,7 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ActivityRequest {
-    private long userId;
+    private Long userId;
     private ActivityType type;
     private Integer duration;
     private Map<String, Object> additionalMetrics;

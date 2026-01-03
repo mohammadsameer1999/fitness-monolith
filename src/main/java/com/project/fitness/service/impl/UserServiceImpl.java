@@ -2,6 +2,7 @@ package com.project.fitness.service.impl;
 
 import com.project.fitness.dto.RegisterRequest;
 import com.project.fitness.dto.UserResponse;
+import com.project.fitness.mapper.UserMapper;
 import com.project.fitness.model.User;
 import com.project.fitness.repository.UserRepository;
 import com.project.fitness.service.UserService;
@@ -15,32 +16,17 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public UserResponse register(RegisterRequest request) {
 
-        User user = User.builder()
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .build();
-
+        User user = userMapper.requestToEntity(request);
         User savedUser = userRepository.save(user);
 
-        return mapToResponse(savedUser);
+        return userMapper.entityToResponse(savedUser);
     }
 
-    private UserResponse mapToResponse(User savedUser) {
-
-        return UserResponse.builder()
-                .id(savedUser.getId())
-                .email(savedUser.getEmail())
-                .password(savedUser.getPassword())
-                .firstName(savedUser.getFirstName())
-                .lastName(savedUser.getLastName())
-                .build();
-    }
 
     @Override
     public List<User> getUsers() {

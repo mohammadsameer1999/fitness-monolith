@@ -14,4 +14,7 @@ public interface ActivityService {
     void deleteActivities(List<Long> ids);
 
      List<Activity> getActivities();
+
+
+   public  List<ActivityResponse>getUserActivites(Long userId);
 }
